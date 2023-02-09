@@ -111,7 +111,8 @@
                 let wsOpened = ref(false);
                 function connectWs() {
                     // wss.value = new WebSocket("ws://localhost:5000");
-                    wss.value = new WebSocket("ws://election-api.zizix6host.com");
+                    let protocol = (window.location.protocol === 'https:') ? 'wss' : 'ws'
+                    wss.value = new WebSocket(protocol+"://election-api.zizix6host.com");
 
                     wss.value.onopen = function () {
                         console.log('connection opened');
