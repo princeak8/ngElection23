@@ -87,9 +87,9 @@
                     <div class="flex flex-row my-2">
                         <p class="w-[33.3333%] fontSize-2"><b>% of Victory:</b></p>
                         <div class="w-[66.6667%] flex flex-row justify-between">
-                            <p class="w-[20%] text-center fontSize-2">60</p>
-                            <p class="w-[20%] text-center fontSize-2">25</p>
-                            <p class="w-[20%] text-center fontSize-2">15</p>
+                            <p class="w-[20%] text-center fontSize-2">0</p>
+                            <p class="w-[20%] text-center fontSize-2">0</p>
+                            <p class="w-[20%] text-center fontSize-2">0</p>
                             <p class="w-[20%] text-center"></p>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                                 <image src="images/LP.png" class="w-[100%] h-full" />
                             </div>
                             <div class="w-[90%] flex mt-[3%]">
-                                <div class="w-[70%] h-[30%] bg-[#00923F] rounded"></div>
+                                <div class="w-[20%] h-[30%] bg-[#00923F] rounded"></div>
                             </div>
                         </div>
                         <div class="flex flex-row">
@@ -118,7 +118,7 @@
                                 <image src="images/APC.png" class="w-[100%] h-full" />
                             </div>
                             <div class="w-[90%] flex mt-[3%]">
-                                <div class="w-[50%] h-[30%] bg-[#5EC2E5] rounded"></div>
+                                <div class="w-[20%] h-[30%] bg-[#5EC2E5] rounded"></div>
                             </div>
                         </div>
                         <div class="flex flex-row">
@@ -126,7 +126,7 @@
                                 <image src="images/PDP.png" class="w-[100%] h-full" />
                             </div>
                             <div class="w-[90%] flex mt-[3%]">
-                                <div class="w-[40%] h-[30%] bg-[#ED3237] rounded"></div>
+                                <div class="w-[20%] h-[30%] bg-[#ED3237] rounded"></div>
                             </div>
                         </div>
                     </div>
