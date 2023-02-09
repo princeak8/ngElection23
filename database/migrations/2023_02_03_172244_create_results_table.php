@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('registered')->default(0);
             $table->integer('invalid')->default(0);
             $table->integer('valid')->default(0);
-            $table->foreignId('party_id');
+            $table->foreignId('party_id')->nullable();
             $table->timestamps();
         });
     }

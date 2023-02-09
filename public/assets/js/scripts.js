@@ -150,24 +150,7 @@ async function getResults() {
     .then(res => {
         console.log('results:',res.data);
         if(res.data.statusCode == 200) {
-            res.data.data.forEach((dbResult) => {
-                const {state_id, state, registered, accreditated, invalid, valid, result} = dbResult;
-                formattedResult = [];
-                result.forEach((r) => {
-                    let partyResult = {};
-                    partyResult[r.party] = r.votes;
-                    formattedResult.push(partyResult);
-                })
-                results.push({
-                    'state_id' : state_id,
-                    'state' : state,
-                    'registered' : registered,
-                    'accreditated' : accreditated,
-                    'invalid' : invalid,
-                    'valid' : valid,
-                    'result' : formattedResult
-                });
-            });
+            results = prepareStatesResults(res.data.data);
         }else{
             console.log('error', res.data.message);
         }
