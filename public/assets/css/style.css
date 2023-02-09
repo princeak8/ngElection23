@@ -1,0 +1,27 @@
+[v-cloak] {
+    display: none;
+}  
+
+.hide {
+    display: none;
+}
+
+
+.fontSize {
+    font-size: clamp(0.5rem, 2.5vw, 1rem);
+}
+.fontSize-2 {
+    font-size: clamp(0.5rem, 2.5vw, 2rem);
+}
+.fontSize-3 {
+    font-size: clamp(0.3rem, 1vw, 1rem);
+}
+.black-bg{
+    background-color: #000000;
+}
+.green-bg {
+    background-color: #228B22;
+}
+.red-bg {
+    background-color: #900C3F ;
+}
