@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="assets/css/style.css" />
     </head>
     <body>
-        <div id="main-wrapper" class="w-full h-full">
+        <div id="main-wrapper" class="w-full h-full px-6">
             <div class="flex flex-row w-full">
                 <div v-bind:class="{'red-bg': !wsConnected, 'green-bg': wsConnected}" style="width:20px; height:20px"></div>
                 <div v-if="!firstUpdate" class="ml-2 alert alert-danger">Loading data...</div>
@@ -21,7 +21,9 @@
                     <!-- Default display till vue and data is loaded from axios -->
                     <div :class="{'hide': firstUpdate}" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">LP</p>
-                        <image src="images/peter obi.jpg" class="w-[90%] h-[80%] mx-[5%]" />
+                        <div style="height: clamp(0.5rem, 0.5vw, 5rem); border:thin solid #000">
+                            <image src="images/peter obi.jpg" class="w-[90%] mx-[5%]" />
+                        </div>
                     </div>
                     <div :class="{'hide': firstUpdate}" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">PDP</p>
@@ -36,13 +38,13 @@
                     <div v-cloak v-for="candidate in results" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">@{{candidate.party.name}}</p>
 
-                        <image :src="'images/'+candidate.candidate_photo" class="w-[90%] h-[80%] mx-[5%]" />
+                        <image :src="'images/'+candidate.candidate_photo" class="w-[90%] mx-[5%]" style="height: clamp(1rem, 8vw, 5rem);" />
                         <!-- <image src="images/peter obi.jpg" class="w-[90%] h-[80%] mx-[5%]" /> -->
                     </div>
 
                     <div class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center w-[100%] fontSize">OTHERS</p>
-                        <image src="images/inec.png" class="w-[90%] h-[80%]" />
+                        <image src="images/inec.png" class="w-[90%] h-[80%]" style="height: clamp(1rem, 8vw, 5rem);" />
                     </div>
 
                     
@@ -95,49 +97,49 @@
                     </div>
 
                 </div>
-                <div class="w-[25%] flex justify-end">
+                <!-- <div class="w-[25%] flex justify-end">
                     <p class=" fontSize-2">% of Run-Off</p>
-                </div>
+                </div> -->
             </div>
 
             <!-- Race to presidency -->
-            <div class="my-3">
+            <div class="my-1">
                 <p class="text-lg font-semibold text-center w-full fontSize-2">RACE TO PRESIDENCY</p>
                 <div class="mt-2 flex flex-row">
                     <div class="w-[75%] flex flex-col ml-2">
                         <div class="flex flex-row">
-                            <div class="w-[10%] h-[80%]" >
+                            <div class="w-[5%] h-[80%]" >
                                 <image src="images/LP.png" class="w-[100%] h-full" />
                             </div>
-                            <div class="w-[90%] flex mt-[3%]">
-                                <div class="w-[20%] h-[30%] bg-[#00923F] rounded"></div>
+                            <div class="w-[95%] flex mt-[1.5%]">
+                                <div class="w-[20%] h-[25%] bg-[#00923F] rounded"></div>
                             </div>
                         </div>
                         <div class="flex flex-row">
-                            <div class="w-[10%] h-[80%]" >
+                            <div class="w-[5%] h-[80%]" >
                                 <image src="images/APC.png" class="w-[100%] h-full" />
                             </div>
-                            <div class="w-[90%] flex mt-[3%]">
-                                <div class="w-[20%] h-[30%] bg-[#5EC2E5] rounded"></div>
+                            <div class="w-[95%] flex mt-[1.5%]">
+                                <div class="w-[20%] h-[25%] bg-[#5EC2E5] rounded"></div>
                             </div>
                         </div>
                         <div class="flex flex-row">
-                            <div class="w-[10%] h-[80%]" >
+                            <div class="w-[5%] h-[80%]" >
                                 <image src="images/PDP.png" class="w-[100%] h-full" />
                             </div>
-                            <div class="w-[90%] flex mt-[3%]">
-                                <div class="w-[20%] h-[30%] bg-[#ED3237] rounded"></div>
+                            <div class="w-[95%] flex mt-[1.5%]">
+                                <div class="w-[20%] h-[25%] bg-[#ED3237] rounded"></div>
                             </div>
                         </div>
                     </div>
                     <!-- The price -->
-                    <div class="w-[25%] m-0" style="height: clamp(1rem, 20vw, 30rem);"><image src="images/presidency.jpg" class="w-[100%] h-full" /></div>
+                    <div class="w-[25%] m-0" style="height: clamp(1rem, 10vw, 20rem);"><image src="images/presidency.jpg" class="w-[100%] h-full" /></div>
                 </div>
             </div>
 
             <!-- table -->
             <div>
-                <table class="table w-full">
+                <table class="table w-full border-r-2">
                     <tr class="h-[6vh]">
                         <td class="text-center border-r-2 border-t-2 fontSize-3">STATE</td>
                         <td class="text-center border-r-2 border-t-2 fontSize-3">REGISTERED</td>
@@ -158,7 +160,7 @@
                             <p class="w-full text-center"><span>APC:</span> <span v-cloak>@{{state.result.APC.toLocaleString('en-US')}}</span></p>
                             <p class="w-full text-center"><span>PDP:</span> <span v-cloak>@{{state.result.PDP.toLocaleString('en-US')}}</span></p>
                         </td>
-                        <td class="text-center flex justify-center">
+                        <td class="text-center flex justify-center h-full">
                             <span v-cloak>
                                 <image v-if="state.winner" :src="'images/'+state.winner.logo" style="height: clamp(0.5rem, 3vw, 3rem);" />
                             </span>
@@ -355,10 +357,7 @@
                         setTimeout(resolve, ms);
                     });
                 }
-                onMounted( async () => {
-                    console.log('connect to ws');
-                    // new WebSocket("ws://election-api.zizix6host.com");
-                    connectWs();
+                async function retrieveCombinedData() {
                     let combinedData = await getCombinedData();
                     states.value = combinedData.dbStates;
                     results.value = combinedData.totalResults;
@@ -366,6 +365,17 @@
                     parties = combinedData.dbParties;
                     updateData(combinedData.dbStateResults);
                     firstUpdate.value = true;
+                }
+                onMounted( async () => {
+                    console.log('connect to ws');
+                    // new WebSocket("ws://election-api.zizix6host.com");
+                    connectWs();
+                    try{
+                        await retrieveCombinedData();
+                    }catch(e) {
+                        console.log('API call failed...'+e.message);
+                        await retrieveCombinedData();
+                    }
                     setInterval(async ()=>{
                         let dbResults = await getResults();
                         updateData(dbResults)
