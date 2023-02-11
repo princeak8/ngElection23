@@ -13,6 +13,19 @@
             <div class="flex flex-row w-full">
                 <div v-bind:class="{'red-bg': !wsConnected, 'green-bg': wsConnected}" style="width:20px; height:20px"></div>
                 <div v-if="!firstUpdate" class="ml-2 alert alert-danger">Loading data...</div>
+                <div class="w-full h-10 flex flex-row">
+                    <h2 class="ml-[20%] text-4xl w-full">2023 <image src="images/flag.jpg" style="display:inline; height:100%" class="rounded" /> PRESIDENTIAL ELECTION</h2>
+                    <div class="ml-0 flex flex-row">
+                        <p class="mx-1">@{{countdown.days}}DAYS</p>
+                        <p class="mx-1">:</p>
+                        <p class="mx-1">@{{countdown.hrs}}HOURS </p>
+                        <p class="mx-1">:</p>
+                        <P class="mx-1">@{{countdown.mins}}MINS </P>
+                        <p class="mx-1">:</p>
+                        <p class="mx-1">@{{countdown.sec}}SECONDS</p>
+                    </div>
+                    <hr/>
+                </div>
             </div>
             <div class="flex justify-center h-[15%]" id="top-bar">
                 <div class="w-[50%] flex justify-between" id="top-bar-centered">
@@ -184,6 +197,9 @@
                 let parties = [];
                 let total = ref([]);
                 let wss = ref('');
+                let countdown = ref({
+                    days: 23, hrs: 48, mins: 56, sec: 55
+                });
                 let wsConnected = ref(false);
                 let firstUpdate = ref(false);
 
@@ -214,6 +230,28 @@
                     }
                     // return result with - sign if negative
                     return sign < 0 ? '-' + result : result;
+                }
+
+                function countDownVars()
+                {
+                    // Set the date we're counting down to
+                    var countDownDate = new Date("Feb 25, 2023 08:00:00").getTime();
+
+                    // Update the count down every 1 second
+                    var x = setInterval(function() {
+
+                        // Get today's date and time
+                        var now = new Date().getTime();
+
+                        // Find the distance between now and the count down date
+                        var distance = countDownDate - now;
+
+                        // Time calculations for days, hours, minutes and seconds
+                        countdown.value.days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        countdown.value.hrs = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        countdown.value.mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        countdown.value.sec = Math.floor((distance % (1000 * 60)) / 1000);
+                    });
                 }
 
                 function connectWs() {
@@ -395,6 +433,7 @@
                     firstUpdate.value = true;
                 }
                 onMounted( async () => {
+                    countDownVars();
                     console.log('connect to ws');
                     // new WebSocket("ws://election-api.zizix6host.com");
                     connectWs();
@@ -412,7 +451,7 @@
                     
                 })
 
-                return { results, states, total, parties, wsConnected, firstUpdate, format }
+                return { results, states, total, parties, wsConnected, firstUpdate, format, countdown }
             }
         }).mount('#main-wrapper')
     </script>

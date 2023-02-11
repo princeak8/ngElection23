@@ -218,3 +218,5 @@ function getStatesFromStorage()
     return (localStorage['states']) ? JSON.parse(localStorage['states']) : false;
 }
 
+
+
