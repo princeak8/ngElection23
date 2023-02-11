@@ -21,9 +21,7 @@
                     <!-- Default display till vue and data is loaded from axios -->
                     <div :class="{'hide': firstUpdate}" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">LP</p>
-                        <div style="height: clamp(0.5rem, 0.5vw, 5rem); border:thin solid #000">
-                            <image src="images/peter obi.jpg" class="w-[90%] mx-[5%] rounded" style="height: clamp(1rem, 8vw, 5rem);" />
-                        </div>
+                        <image src="images/peter obi.jpg" class="w-[90%] mx-[5%] rounded" style="height: clamp(1rem, 8vw, 5rem);" />
                     </div>
                     <div :class="{'hide': firstUpdate}" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">PDP</p>
