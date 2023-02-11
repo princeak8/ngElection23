@@ -151,7 +151,7 @@
                     </tr>
                     <tr v-for="state in states">
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.name}}</span></td>
-                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.registered.toLocaleString('en-US')}}</span></td>
+                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{format(state.registered)}}</span></td>
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.accreditated.toLocaleString('en-US')}}</span></td>
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.invalid.toLocaleString('en-US')}}</span></td>
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.valid.toLocaleString('en-US')}}</span></td>
@@ -188,6 +188,36 @@
                 let wss = ref('');
                 let wsConnected = ref(false);
                 let firstUpdate = ref(false);
+
+                function format(val) {
+                    // remove sign if negative
+                    var sign = 1;
+                    if (val < 0) {
+                        sign = -1;
+                        val = -val;
+                    }
+                    // trim the number decimal point if it exists
+                    let num = val.toString().includes('.') ? val.toString().split('.')[0] : val.toString();
+                    let len = num.toString().length;
+                    let result = '';
+                    let count = 1;
+
+                    for (let i = len - 1; i >= 0; i--) {
+                        result = num.toString()[i] + result;
+                        if (count % 3 === 0 && count !== 0 && i !== 0) {
+                        result = ',' + result;
+                        }
+                        count++;
+                    }
+
+                    // add number after decimal point
+                    if (val.toString().includes('.')) {
+                        result = result + '.' + val.toString().split('.')[1];
+                    }
+                    // return result with - sign if negative
+                    return sign < 0 ? '-' + result : result;
+                }
+
                 function connectWs() {
                     // wss.value = new WebSocket("ws://localhost:5000");
                     let protocol = (window.location.protocol === 'https:') ? 'wss' : 'ws'
@@ -384,7 +414,7 @@
                     
                 })
 
-                return { results, states, total, parties, wsConnected, firstUpdate }
+                return { results, states, total, parties, wsConnected, firstUpdate, format }
             }
         }).mount('#main-wrapper')
     </script>
