@@ -74,13 +74,13 @@
                                 <tr v-for="(state, i) in states" class="w-full border-t-2">
                                     <td class="text-center">@{{i+1}}</td>
                                     <td class="text-center">@{{state.name}}</td>
-                                    <td class="text-center w-[15%]"><input type="number" class="border-2 h-12 text-center"  v-model="state.registered" /></td>
-                                    <td class="text-center"><input type="number" class="border-2 h-12 text-center" v-model="state.accreditated" /></td>
-                                    <td class="text-center"><input type="number" class="border-2 h-12 text-center" v-model="state.invalid" /></td>
-                                    <td class="text-center"><input type="number" class="border-2 h-12 text-center" v-model="state.valid" /></td>
+                                    <td class="text-center w-[15%]"><input type="number" class="input border-2 h-12 text-center" @blur.native="save(i)" v-model="state.registered" /></td>
+                                    <td class="text-center"><input type="number" class="input border-2 h-12 text-center" @blur="save(i)" v-model="state.accreditated" /></td>
+                                    <td class="text-center"><input type="number" class="input border-2 h-12 text-center" @blur="save(i)" v-model="state.invalid" /></td>
+                                    <td class="text-center"><input type="number" class="input border-2 h-12 text-center" @blur="save(i)" v-model="state.valid" /></td>
                                     <td class="text-center mt-2" style="margin-top: 10px;">
                                         <p class="flex flex-row" v-for="party in parties">
-                                            <span class="w-1/3">@{{party.name}}:</span> <input type="number" class="border-2 h-8 w-2/3 text-center" v-model="state.result[party.name]" />
+                                            <span class="w-1/3">@{{party.name}}:</span> <input type="number" class="input border-2 h-8 w-2/3 text-center" @blur="save(i)" v-model="state.result[party.name]" />
                                         </p>
                                     </td>
                                     <td class="text-center"><button class="btn btn-success" @click="save(i)">SAVE</button></td>
@@ -258,6 +258,9 @@
                     }
                     saveStatesToLoacalStorage(states.value, true);
                 }
+                function handleBlur() {
+                    console.log('blur triggered');
+                }
                 onMounted(async () => {
                     connectWs();
                     states.value = await getStates();
@@ -267,7 +270,7 @@
                     parties.value = await getParties();
                     // var wss = new WebSocket("ws://localhost:5000");
                 })
-                return { states, parties, save }
+                return { states, parties, save, handleBlur }
             }
         }).mount('#main-wrapper')
     </script>
