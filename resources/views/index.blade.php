@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="assets/css/style.css" />
     </head>
     <body>
-        <div id="main-wrapper" class="w-full h-full px-6">
+        <div id="main-wrapper" class="w-full h-full px-6 font-[inter] text-[#21252B]">
             <div class="flex flex-row w-full">
                 <div v-bind:class="{'red-bg': !wsConnected, 'green-bg': wsConnected}" style="width:20px; height:20px"></div>
                 <div v-if="!firstUpdate" class="ml-2 alert alert-danger">Loading data...</div>
@@ -22,29 +22,29 @@
                     <div :class="{'hide': firstUpdate}" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">LP</p>
                         <div style="height: clamp(0.5rem, 0.5vw, 5rem); border:thin solid #000">
-                            <image src="images/peter obi.jpg" class="w-[90%] mx-[5%]" />
+                            <image src="images/peter obi.jpg" class="w-[90%] mx-[5%] rounded" style="height: clamp(1rem, 8vw, 5rem);" />
                         </div>
                     </div>
                     <div :class="{'hide': firstUpdate}" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">PDP</p>
-                        <image src="images/atiku.jpg" class="w-[90%] h-[80%] mx-[5%]" />
+                        <image src="images/atiku.jpg" class="w-[90%] mx-[5%] rounded" style="height: clamp(1rem, 8vw, 5rem);" />
                     </div>
                     <div :class="{'hide': firstUpdate}" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">APC</p>
-                        <image src="images/tinibu.jpg" class="w-[90%] h-[80%]" />
+                        <image src="images/tinibu.jpg" class="w-[90%]  mx-[5%] rounded" style="height: clamp(1rem, 8vw, 5rem);" />
                     </div>
                     <!-- End of Default display -->
 
                     <div v-cloak v-for="candidate in results" class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center">@{{candidate.party.name}}</p>
 
-                        <image :src="'images/'+candidate.candidate_photo" class="w-[90%] mx-[5%]" style="height: clamp(1rem, 8vw, 5rem);" />
+                        <image :src="'images/'+candidate.candidate_photo" class="w-[90%] mx-[5%] rounded" style="height: clamp(1rem, 8vw, 5rem);" />
                         <!-- <image src="images/peter obi.jpg" class="w-[90%] h-[80%] mx-[5%]" /> -->
                     </div>
 
                     <div class="w-[20%] flex flex-col justify-center h-[100%]">
                         <p class="text-center w-[100%] fontSize">OTHERS</p>
-                        <image src="images/inec.png" class="w-[90%] h-[80%]" style="height: clamp(1rem, 8vw, 5rem);" />
+                        <image src="images/inec.png" class="w-[90%]  mx-[5%] rounded" style="height: clamp(1rem, 8vw, 5rem);" />
                     </div>
 
                     
@@ -55,10 +55,10 @@
             <div class="flex flex-row">
                 <div class="w-[75%] flex flex-col">
                     <div class="flex flex-row my-2">
-                        <p class="w-[33.3333%] fontSize-2"><b>Total Votes:</b></p>
+                        <p class="w-[33.3333%] fontSize-2 text-sm"><b>Total Votes:</b></p>
                         <div class="w-[66.6667%] flex flex-row justify-between">
 
-                            <p v-cloak v-for="result in results" class="w-[20%] fontSize-2 text-center">@{{result.votes.toLocaleString('en-US')}}</p>
+                            <p v-cloak v-for="result in results" class="w-[20%] fontSize-2 text-center">@{{format(result.votes)}}</p>
 
                             <!-- Default display till vue and data is loaded from axios -->
                             <p :class="{'hide': firstUpdate}" class="w-[20%] fontSize-2 text-center">0</p>
@@ -68,7 +68,7 @@
                             <!-- End of Default display -->
 
 
-                            <p v-if="firstUpdate" v-cloak class="w-[20%] fontSize-2 text-center">@{{total.others.toLocaleString('en-US')}}</p>
+                            <p v-if="firstUpdate" v-cloak class="w-[20%] fontSize-2 text-center">@{{format(total.others)}}</p>
                         </div>
                     </div>
                     <div class="flex flex-row my-2">
@@ -117,14 +117,14 @@
                         </div>
                         <div class="flex flex-row">
                             <div class="w-[5%] h-[80%]" >
-                                <image src="images/APC.png" class="w-[100%] h-full" />
+                                <image src="images/APC.png" class="w-[100%] h-full rounded-full" />
                             </div>
                             <div class="w-[95%] flex mt-[1.5%]">
                                 <div class="w-[20%] h-[25%] bg-[#5EC2E5] rounded"></div>
                             </div>
                         </div>
                         <div class="flex flex-row">
-                            <div class="w-[5%] h-[80%]" >
+                            <div class="w-[5%] h-[80%]">
                                 <image src="images/PDP.png" class="w-[100%] h-full" />
                             </div>
                             <div class="w-[95%] flex mt-[1.5%]">
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <!-- The price -->
-                    <div class="w-[25%] m-0" style="height: clamp(1rem, 10vw, 20rem);"><image src="images/presidency.jpg" class="w-[100%] h-full" /></div>
+                    <div class="w-[25%] m-0" style="height: clamp(1rem, 10vw, 20rem);"><image src="images/presidency.jpg" class="w-[100%] h-full rounded" /></div>
                 </div>
             </div>
 
@@ -162,7 +162,7 @@
                         </td>
                         <td class="text-center justify-center">
                             <span v-cloak>
-                                <image v-if="state.winner" :src="'images/'+state.winner.logo" style="height: clamp(0.5rem, 3vw, 3rem); margin-right:auto; margin-left: auto; margin-top:clamp(0.5rem, 0.5vw, 1rem);" />
+                                <image v-if="state.winner" class="rounded-full" :src="'images/'+state.winner.logo" style="height: clamp(0.5rem, 3vw, 3rem); margin-right:auto; margin-left: auto; margin-top:clamp(0.5rem, 0.5vw, 1rem);" />
                             </span>
                         </td>
                     </tr>

@@ -11,7 +11,7 @@
     font-size: clamp(0.5rem, 2.5vw, 1rem);
 }
 .fontSize-2 {
-    font-size: clamp(0.5rem, 2.5vw, 2rem);
+    font-size: clamp(0.5rem, 2vw, 2rem);
 }
 .fontSize-3 {
     font-size: clamp(0.3rem, 1vw, 1rem);
