@@ -152,13 +152,13 @@
                     <tr v-for="state in states">
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.name}}</span></td>
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{format(state.registered)}}</span></td>
-                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.accreditated.toLocaleString('en-US')}}</span></td>
-                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.invalid.toLocaleString('en-US')}}</span></td>
-                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.valid.toLocaleString('en-US')}}</span></td>
+                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{format(state.accreditated)}}</span></td>
+                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{format(state.invalid)}}</span></td>
+                        <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{format(state.valid)}}</span></td>
                         <td class="text-center border-r-2 fontSize-3">
-                            <p class="w-full text-center"><span>LP:</span> <span v-cloak>@{{state.result.LP.toLocaleString('en-US')}}</span></p>
-                            <p class="w-full text-center"><span>APC:</span> <span v-cloak>@{{state.result.APC.toLocaleString('en-US')}}</span></p>
-                            <p class="w-full text-center"><span>PDP:</span> <span v-cloak>@{{state.result.PDP.toLocaleString('en-US')}}</span></p>
+                            <p class="w-full text-center"><span>LP:</span> <span v-cloak>@{{format(state.result.LP)}}</span></p>
+                            <p class="w-full text-center"><span>APC:</span> <span v-cloak>@{{format(state.result.APC)}}</span></p>
+                            <p class="w-full text-center"><span>PDP:</span> <span v-cloak>@{{format(state.result.PDP)}}</span></p>
                         </td>
                         <td class="text-center justify-center">
                             <span v-cloak>
