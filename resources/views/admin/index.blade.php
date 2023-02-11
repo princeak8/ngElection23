@@ -74,7 +74,7 @@
                                 <tr v-for="(state, i) in states" class="w-full border-t-2">
                                     <td class="text-center">@{{i+1}}</td>
                                     <td class="text-center">@{{state.name}}</td>
-                                    <td class="text-center w-[15%]"><input type="number" class="input border-2 h-12 text-center" @blur.native="save(i)" v-model="state.registered" /></td>
+                                    <td class="text-center w-[15%]"><input type="number" class="input border-2 h-12 text-center" @blur="save(i)" v-model="state.registered" /></td>
                                     <td class="text-center"><input type="number" class="input border-2 h-12 text-center" @blur="save(i)" v-model="state.accreditated" /></td>
                                     <td class="text-center"><input type="number" class="input border-2 h-12 text-center" @blur="save(i)" v-model="state.invalid" /></td>
                                     <td class="text-center"><input type="number" class="input border-2 h-12 text-center" @blur="save(i)" v-model="state.valid" /></td>
