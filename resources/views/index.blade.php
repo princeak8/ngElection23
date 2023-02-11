@@ -156,13 +156,13 @@
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.invalid.toLocaleString('en-US')}}</span></td>
                         <td class="text-center border-r-2 fontSize-3"><span v-cloak>@{{state.valid.toLocaleString('en-US')}}</span></td>
                         <td class="text-center border-r-2 fontSize-3">
-                            <p class="w-full text-center border-b-2"><span>LP:</span> <span v-cloak>@{{state.result.LP.toLocaleString('en-US')}}</span></p>
+                            <p class="w-full text-center"><span>LP:</span> <span v-cloak>@{{state.result.LP.toLocaleString('en-US')}}</span></p>
                             <p class="w-full text-center"><span>APC:</span> <span v-cloak>@{{state.result.APC.toLocaleString('en-US')}}</span></p>
                             <p class="w-full text-center"><span>PDP:</span> <span v-cloak>@{{state.result.PDP.toLocaleString('en-US')}}</span></p>
                         </td>
-                        <td class="text-center flex justify-center h-full">
+                        <td class="text-center justify-center">
                             <span v-cloak>
-                                <image v-if="state.winner" :src="'images/'+state.winner.logo" style="height: clamp(0.5rem, 3vw, 3rem);" />
+                                <image v-if="state.winner" :src="'images/'+state.winner.logo" style="height: clamp(0.5rem, 3vw, 3rem); margin-right:auto; margin-left: auto; margin-top:clamp(0.5rem, 0.5vw, 1rem);" />
                             </span>
                         </td>
                     </tr>
