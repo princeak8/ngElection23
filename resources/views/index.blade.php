@@ -211,9 +211,9 @@
                     if(states.value.length > 0) {
                         states.value.forEach((state) => {
                             if(state.valid && state.valid > 0) {
-                                total += state.valid;
+                                total = total + state.valid;
                             }else{
-                                total += state.registered;
+                                total = total + state.registered;
                             }
                             console.log("total:", total);
                         })
