@@ -150,9 +150,9 @@
 
             <!-- table -->
             <div>
-                <p>Total Votes: @{{format(totalVotes)}}</p>
+                <!-- <p>Total Votes: @{{format(totalVotes)}}</p>
                 <p>Target Votes: @{{format(targetVotes)}}</p>
-                <p>LP percentage: @{{lpPercentage}}</p>
+                <p>LP percentage: @{{lpPercentage}}</p> -->
                 <table class="table w-full border-r-2">
                     <tr class="h-[6vh]">
                         <td class="text-center border-r-2 border-t-2 fontSize-3">STATE</td>
@@ -215,7 +215,7 @@
                             }else{
                                 total = parseInt(total) + parseInt(state.registered);
                             }
-                            console.log("total:", total);
+                            // console.log("total:", total);
                         })
                     }
 
