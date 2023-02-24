@@ -215,6 +215,7 @@
                             }else{
                                 total += state.registered;
                             }
+                            console.log("total:", total);
                         })
                     }
 
