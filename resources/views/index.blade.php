@@ -211,9 +211,9 @@
                     if(states.value.length > 0) {
                         states.value.forEach((state) => {
                             if(state.valid && state.valid > 0) {
-                                total = parseint(total) + parseint(state.valid);
+                                total = parseInt(total) + parseint(state.valid);
                             }else{
-                                total = parseint(total) + parseint(state.registered);
+                                total = parseInt(total) + parseint(state.registered);
                             }
                             console.log("total:", total);
                         })
