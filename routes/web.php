@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,15 @@ Route::get('/', function() {
     return view('index');
 });
 
+Route::get('/login', function() {
+    return view('admin/login');
+})->name('login');
+
+Route::post('/auth/login', [AuthController::class, 'login']);
+
 Route::group([
     'prefix' => 'admin',
+    'middleware' => ['auth']
 ], function () {
     Route::get('/', function() {
         return view('admin/index');

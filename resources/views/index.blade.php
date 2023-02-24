@@ -123,7 +123,7 @@
                                 <image src="images/LP.png" class="w-[100%] h-full" />
                             </div>
                             <div class="w-[95%] flex mt-[1.5%]">
-                                <div class="w-[20%] h-[25%] bg-[#00923F] rounded"></div>
+                                <div class="w-[14%] h-[25%] bg-[#00923F] rounded border-2" :style="{width:lpPercentage+'%'}" ></div>
                             </div>
                         </div>
                         <div class="flex flex-row">
@@ -131,7 +131,7 @@
                                 <image src="images/APC.png" class="w-[100%] h-full rounded-full" />
                             </div>
                             <div class="w-[95%] flex mt-[1.5%]">
-                                <div class="w-[20%] h-[25%] bg-[#5EC2E5] rounded"></div>
+                                <div class="h-[25%] bg-[#5EC2E5] rounded" :style="{width:apcPercentage+'%'}" ></div>
                             </div>
                         </div>
                         <div class="flex flex-row">
@@ -139,7 +139,7 @@
                                 <image src="images/PDP.png" class="w-[100%] h-full" />
                             </div>
                             <div class="w-[95%] flex mt-[1.5%]">
-                                <div class="w-[20%] h-[25%] bg-[#ED3237] rounded"></div>
+                                <div class="h-[25%] bg-[#ED3237] rounded" :style="{width:pdpPercentage+'%'}"></div>
                             </div>
                         </div>
                     </div>
@@ -150,6 +150,9 @@
 
             <!-- table -->
             <div>
+                <p>Total Votes: @{{format(totalVotes)}}</p>
+                <p>Target Votes: @{{format(targetVotes)}}</p>
+                <p>LP percentage: @{{lpPercentage}}</p>
                 <table class="table w-full border-r-2">
                     <tr class="h-[6vh]">
                         <td class="text-center border-r-2 border-t-2 fontSize-3">STATE</td>
@@ -183,7 +186,7 @@
     </body>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-        const { ref, onMounted }  = Vue;
+        const { ref, onMounted, computed, reactive }  = Vue;
 
         const { createApp } = Vue
         // const websocket = require(['websocket/lib/websocket.js']);
@@ -202,6 +205,84 @@
                 });
                 let wsConnected = ref(false);
                 let firstUpdate = ref(false);
+
+                const totalVotes = computed(() => {
+                    let total = 0;
+                    if(states.value.length > 0) {
+                        states.value.forEach((state) => {
+                            if(state.valid && state.valid > 0) {
+                                total += state.valid;
+                            }else{
+                                total += state.registered;
+                            }
+                        })
+                    }
+
+                    return total;
+                });
+
+                const targetVotes = computed(() => {
+                    let target = 0;
+                    if (totalVotes.value > 0) {
+                        let sharedVotes = 0.9 * totalVotes.value;
+                        target = parseInt(sharedVotes/3)
+                    }
+                    return target;
+                });
+
+                const lpPercentage = computed(() => {
+                    let percentage = 0;
+                    if(results.value.length > 0) {
+                        filteredResults = results.value.filter((result) => result.party.name == "LP");
+                        if(filteredResults.length > 0) {
+                            lpResult = filteredResults[0];
+                            let percentage1 = (lpResult.votes/targetVotes.value) * 100;
+                            percentage1 = (percentage1 > 100) ? 100 : percentage1;
+
+                            let percentage2 = (lpResult.states/24) * 100;
+                            percentage2 = (percentage2 > 100) ? 100 : percentage2;
+
+                            percentage = (percentage1 + percentage2)/2;
+                        }
+                    }
+                    return percentage;
+                });
+
+                const pdpPercentage = computed(() => {
+                    let percentage = 0;
+                    if(results.value.length > 0) {
+                        filteredResults = results.value.filter((result) => result.party.name == "PDP");
+                        if(filteredResults.length > 0) {
+                            pdpResult = filteredResults[0];
+                            let percentage1 = (pdpResult.votes/targetVotes.value) * 100;
+                            percentage1 = (percentage1 > 100) ? 100 : percentage1;
+
+                            let percentage2 = (pdpResult.states/24) * 100;
+                            percentage2 = (percentage2 > 100) ? 100 : percentage2;
+
+                            percentage = (percentage1 + percentage2)/2;
+                        }
+                    }
+                    return percentage;
+                });
+
+                const apcPercentage = computed(() => {
+                    let percentage = 0;
+                    if(results.value.length > 0) {
+                        filteredResults = results.value.filter((result) => result.party.name == "APC");
+                        if(filteredResults.length > 0) {
+                            apcResult = filteredResults[0];
+                            let percentage1 = (apcResult.votes/targetVotes.value) * 100;
+                            percentage1 = (percentage1 > 100) ? 100 : percentage1;
+
+                            let percentage2 = (apcResult.states/24) * 100;
+                            percentage2 = (percentage2 > 100) ? 100 : percentage2;
+
+                            percentage = (percentage1 + percentage2)/2;
+                        }
+                    }
+                    return percentage;
+                });
 
                 function format(val) {
                     // remove sign if negative
@@ -304,7 +385,7 @@
                         if(dbResults.length > 0) {
                             let allStates = states.value;
                             dbResults.forEach((dbResult) => {
-                                console.log('dbResult',dbResult);
+                                // console.log('dbResult',dbResult);
                                 let state = allStates.filter((st) => st.id == dbResult.state_id);
                                 let result = {};
                                 dbResult.result.forEach((dbr) => {
@@ -451,7 +532,7 @@
                     
                 })
 
-                return { results, states, total, parties, wsConnected, firstUpdate, format, countdown }
+                return { results, states, total, parties, wsConnected, firstUpdate, format, countdown, totalVotes, targetVotes, lpPercentage, pdpPercentage, apcPercentage }
             }
         }).mount('#main-wrapper')
     </script>
