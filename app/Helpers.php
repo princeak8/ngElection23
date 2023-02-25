@@ -41,7 +41,7 @@ class Helpers
                     $winner = $stateResult->party_id;
                 }
             }
-            return $winner;
+            return ($highest > 0) ? $winner : false;
         }
         return false;
     }

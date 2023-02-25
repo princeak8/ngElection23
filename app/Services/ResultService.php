@@ -48,6 +48,15 @@ class ResultService
         return $result;
     }
 
+    public function removeWinner($result)
+    {
+        if($result->party_id != null) {
+            $result->party_id = null;
+            $result->update();
+        }
+        return $result;
+    }
+
     public function totalValidVotes()
     {
         return Result::select(DB::raw("SUM(valid) as total_valid"))->get();

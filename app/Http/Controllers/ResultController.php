@@ -35,7 +35,7 @@ class ResultController extends Controller
             if(isset($data['results'])) {
                 $statesPartyResults = $this->partyResultService->save($data['results'], $result->id);
                 $winner = Helpers::getWinner($result->id);
-                if($winner) $result = $this->resultService->setWinner($result, $winner);
+                $result = ($winner) ? $this->resultService->setWinner($result, $winner) : $this->resultService->removeWinner($result);
             }
             if($statesPartyResults != null) {
                 $totalPartyVotes = Helpers::calculateTotalPartyVotes($statesPartyResults);
